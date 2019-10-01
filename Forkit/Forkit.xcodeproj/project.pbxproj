@@ -13,6 +13,17 @@
 		2E2F48ED234015A500EC4A38 /* Forkit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F48EB234015A500EC4A38 /* Forkit.xcdatamodeld */; };
 		2E2F48EF234015A900EC4A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2F48EE234015A900EC4A38 /* Assets.xcassets */; };
 		2E2F48F2234015A900EC4A38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E2F48F0234015A900EC4A38 /* LaunchScreen.storyboard */; };
+		2E2F48FD2340179500EC4A38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F48FC2340179500EC4A38 /* LoginViewController.swift */; };
+		2E2F4900234017B600EC4A38 /* BasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F48FF234017B600EC4A38 /* BasicView.swift */; };
+		2E2F49022340180100EC4A38 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F49012340180100EC4A38 /* File.swift */; };
+		2E2F490423401ACD00EC4A38 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F490323401ACD00EC4A38 /* TabbarViewController.swift */; };
+		2E2F490623401B7700EC4A38 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F490523401B7700EC4A38 /* HomeViewController.swift */; };
+		2E2F490823401B8A00EC4A38 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F490723401B8A00EC4A38 /* AccountViewController.swift */; };
+		2E2F490A23401B9600EC4A38 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F490923401B9600EC4A38 /* SearchViewController.swift */; };
+		2E2F490C23401BD100EC4A38 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F490B23401BD100EC4A38 /* OrderViewController.swift */; };
+		2E2F490E2340231700EC4A38 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F490D2340231700EC4A38 /* NavigationView.swift */; };
+		2E2F491123402D6B00EC4A38 /* CategotyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F491023402D6B00EC4A38 /* CategotyView.swift */; };
+		2E2F49132340483E00EC4A38 /* StoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F49122340483E00EC4A38 /* StoreListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +35,17 @@
 		2E2F48EE234015A900EC4A38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E2F48F1234015A900EC4A38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E2F48F3234015A900EC4A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E2F48FC2340179500EC4A38 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2E2F48FF234017B600EC4A38 /* BasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicView.swift; sourceTree = "<group>"; };
+		2E2F49012340180100EC4A38 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		2E2F490323401ACD00EC4A38 /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
+		2E2F490523401B7700EC4A38 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2E2F490723401B8A00EC4A38 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		2E2F490923401B9600EC4A38 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		2E2F490B23401BD100EC4A38 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		2E2F490D2340231700EC4A38 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		2E2F491023402D6B00EC4A38 /* CategotyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategotyView.swift; sourceTree = "<group>"; };
+		2E2F49122340483E00EC4A38 /* StoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +62,11 @@
 		2E2F48D8234015A500EC4A38 = {
 			isa = PBXGroup;
 			children = (
+				2E2F49012340180100EC4A38 /* File.swift */,
+				2E2F48FE2340179D00EC4A38 /* Component */,
+				2E2F48FB2340177300EC4A38 /* Modal */,
+				2E2F48FA2340176A00EC4A38 /* View */,
+				2E2F48F92340172E00EC4A38 /* ViewController */,
 				2E2F48E3234015A500EC4A38 /* Forkit */,
 				2E2F48E2234015A500EC4A38 /* Products */,
 			);
@@ -65,6 +92,52 @@
 				2E2F48EB234015A500EC4A38 /* Forkit.xcdatamodeld */,
 			);
 			path = Forkit;
+			sourceTree = "<group>";
+		};
+		2E2F48F92340172E00EC4A38 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2E2F48FC2340179500EC4A38 /* LoginViewController.swift */,
+				2E2F490523401B7700EC4A38 /* HomeViewController.swift */,
+				2E2F490723401B8A00EC4A38 /* AccountViewController.swift */,
+				2E2F490923401B9600EC4A38 /* SearchViewController.swift */,
+				2E2F490B23401BD100EC4A38 /* OrderViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2E2F48FA2340176A00EC4A38 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E2F490F23402D4D00EC4A38 /* Home */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E2F48FB2340177300EC4A38 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		2E2F48FE2340179D00EC4A38 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				2E2F48FF234017B600EC4A38 /* BasicView.swift */,
+				2E2F490323401ACD00EC4A38 /* TabbarViewController.swift */,
+				2E2F490D2340231700EC4A38 /* NavigationView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		2E2F490F23402D4D00EC4A38 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2E2F491023402D6B00EC4A38 /* CategotyView.swift */,
+				2E2F49122340483E00EC4A38 /* StoreListView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +211,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E2F490A23401B9600EC4A38 /* SearchViewController.swift in Sources */,
+				2E2F48FD2340179500EC4A38 /* LoginViewController.swift in Sources */,
+				2E2F49132340483E00EC4A38 /* StoreListView.swift in Sources */,
+				2E2F49022340180100EC4A38 /* File.swift in Sources */,
+				2E2F490423401ACD00EC4A38 /* TabbarViewController.swift in Sources */,
+				2E2F491123402D6B00EC4A38 /* CategotyView.swift in Sources */,
+				2E2F490623401B7700EC4A38 /* HomeViewController.swift in Sources */,
 				2E2F48E7234015A500EC4A38 /* ViewController.swift in Sources */,
+				2E2F4900234017B600EC4A38 /* BasicView.swift in Sources */,
 				2E2F48ED234015A500EC4A38 /* Forkit.xcdatamodeld in Sources */,
 				2E2F48E5234015A500EC4A38 /* AppDelegate.swift in Sources */,
+				2E2F490C23401BD100EC4A38 /* OrderViewController.swift in Sources */,
+				2E2F490E2340231700EC4A38 /* NavigationView.swift in Sources */,
+				2E2F490823401B8A00EC4A38 /* AccountViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
