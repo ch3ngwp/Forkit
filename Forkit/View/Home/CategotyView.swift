@@ -9,7 +9,6 @@
 import UIKit
 
 class CateCell:UICollectionViewCell{
-    
     let img:UIImageView={
         let img = UIImageView()
         img.contentMode = .scaleAspectFit

@@ -136,6 +136,7 @@ class StoreListView: BasicView,UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StoreCell
+        cell.selectionStyle = .none
         return cell
     }
     

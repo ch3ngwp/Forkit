@@ -12,28 +12,33 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    //initial navigation bar
     let navigator:HomeNavigator={
         let navi = HomeNavigator()
         return navi
     }()
     
+    //initial category part, check detail in categoryview.swift
     let categoryView:CategoryView={
         let cate = CategoryView()
         return cate
     }()
     
+    //initial store list, check detail in StoreListView.swift
     let storeList:StoreListView={
         let list = StoreListView()
         return list
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initView()
         // Do any additional setup after loading the view.
     }
     
+    
+    //add constraint for each component(set position)
     func initView(){
         view.addSubview(navigator)
         navigator.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
