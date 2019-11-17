@@ -20,6 +20,7 @@ class CateCell:UICollectionViewCell{
         let label = UILabel()
         label.textColor = UIColor.black.withAlphaComponent(0.75)
         label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Moya
+import Result
 
 
-
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController,storeTableDelegate {
+    
+    
+   
+    
 
     //initial navigation bar
     let navigator:HomeNavigator={
@@ -27,13 +32,29 @@ class HomeViewController: UIViewController {
     //initial store list, check detail in StoreListView.swift
     let storeList:StoreListView={
         let list = StoreListView()
+//        list.tableView.isScrollEnabled = false
         return list
     }()
     
+    func storeList(storeSelect index: Int) {
+        let vc = StoreViewController()
+        self.present(vc, animated: false, completion: nil)
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        let isAuth = UserDefaults.standard.bool(forKey: "Auth")
+//        if(!isAuth){
+//            let vc = LoginViewController()
+//            self.present(vc, animated: false, completion: nil)
+//        }
+//        
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(isPhoneX)
         initView()
+        test()
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +80,26 @@ class HomeViewController: UIViewController {
         storeList.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
+    
+    func test(){
+        let provider:MoyaProvider<testRequest> = MoyaProvider<testRequest>()
+        provider.request(.test()){result in
+            switch(result){
+            case let .success(moyaResponse):
+                do{
+                    //here dataResponse received from a network request
+                    let jsonResponse = try JSONSerialization.jsonObject(with:
+                        moyaResponse.data, options: [])
+                    print(jsonResponse)
+                    
+                } catch let parsingError {
+                    print("Error", parsingError)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

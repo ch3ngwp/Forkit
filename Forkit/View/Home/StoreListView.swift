@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol storeTableDelegate:NSObjectProtocol {
+    func storeList( storeSelect index:Int)
+}
 class StoreCell:UITableViewCell{
     
     let img:UIImageView={
@@ -130,6 +132,7 @@ class StoreCell:UITableViewCell{
 }
 
 class StoreListView: BasicView,UITableViewDelegate,UITableViewDataSource {
+    weak var delegate:storeTableDelegate?
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -142,6 +145,10 @@ class StoreListView: BasicView,UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 314
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.storeList(storeSelect: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
