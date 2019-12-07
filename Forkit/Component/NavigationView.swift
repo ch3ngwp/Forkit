@@ -24,16 +24,25 @@ class TextField: UITextField {
     }
 }
 
+
+protocol HomeNavigationDelegate:NSObjectProtocol {
+    func selectLocation()
+}
 class HomeNavigator: BasicView {
-    let location:UILabel={
-        let label = UILabel()
-        label.textAlignment = .center
-        label.textColor = UIColor.white
-        label.text = "2711 N 1st St., San Jose, CA 95134"
-        label.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.light)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    weak var delegate:HomeNavigationDelegate?
+    let location:UIButton={
+        let btn = UIButton(type: .system)
+        btn.setUnderlineTitle(title: "3057 Stevens Creek Boulevard")
+        btn.tintColor = UIColor.white
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(handleSelect), for: .touchUpInside)
+        return btn
     }()
+    
+    @objc func handleSelect(){
+        self.delegate?.selectLocation()
+    }
     
     let search:TextField={
         let tf = TextField()
@@ -54,7 +63,7 @@ class HomeNavigator: BasicView {
         location.topAnchor.constraint(equalTo: self.topAnchor,constant:isPhoneX ? 44 : 20).isActive = true
         location.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         location.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        location.heightAnchor.constraint(greaterThanOrEqualToConstant: 16).isActive = true
+        location.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         addSubview(search)
         search.topAnchor.constraint(equalTo: location.bottomAnchor,constant:8).isActive = true
@@ -74,8 +83,16 @@ class HomeNavigator: BasicView {
 }
 
 
+protocol AccountDelegate:NSObjectProtocol {
+    func handleSetting()
+}
 class AccountNavigator:BasicView{
-    
+    weak var delegate:AccountDelegate?
+    var data:[String] = []{
+        didSet{
+            name.text = data[1]
+        }
+    }
     let img:UIImageView={
         let img = UIImageView()
         img.layer.cornerRadius = 4
@@ -106,6 +123,19 @@ class AccountNavigator:BasicView{
         return label
     }()
     
+    let setting:UIButton={
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(named: "settings"), for: .normal)
+        btn.tintColor = UIColor.white
+        btn.addTarget(self, action: #selector(handleSetting), for: .touchUpInside)
+        return btn
+    }()
+    
+    @objc func handleSetting(){
+        self.delegate?.handleSetting()
+    }
+    
     override func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = MyColor.themeColor
@@ -125,6 +155,12 @@ class AccountNavigator:BasicView{
         name.leftAnchor.constraint(equalTo: img.rightAnchor,constant:16).isActive = true
         name.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier:1/2).isActive = true
         
+        addSubview(setting)
+        setting.centerYAnchor.constraint(equalTo: name.centerYAnchor).isActive = true
+        setting.rightAnchor.constraint(equalTo: self.rightAnchor,constant:-16).isActive = true
+        setting.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        setting.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        
         addSubview(id)
         id.topAnchor.constraint(equalTo: name.bottomAnchor).isActive = true
         id.heightAnchor.constraint(greaterThanOrEqualToConstant: 16).isActive = true
@@ -143,6 +179,17 @@ class MyNavigator:BasicView{
         return label
     }()
     
+    let left_view:UIView={
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let right_view:UIView={
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override func setupView() {
         backgroundColor = MyColor.themeColor
@@ -153,5 +200,17 @@ class MyNavigator:BasicView{
         title.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         title.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         title.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        addSubview(left_view)
+        left_view.topAnchor.constraint(equalTo: title.topAnchor).isActive = true
+        left_view.leftAnchor.constraint(equalTo: self.leftAnchor,constant:16).isActive = true
+        left_view.heightAnchor.constraint(equalTo: title.heightAnchor).isActive = true
+        left_view.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
+        
+        addSubview(right_view)
+        right_view.topAnchor.constraint(equalTo: title.topAnchor).isActive = true
+        right_view.rightAnchor.constraint(equalTo: self.rightAnchor,constant:-16).isActive = true
+        right_view.heightAnchor.constraint(equalTo: title.heightAnchor).isActive = true
+        right_view.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
     }
 }

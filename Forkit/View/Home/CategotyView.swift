@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+protocol CategoryDelegate:NSObjectProtocol{
+    func categorySelecte(categoryId:Int,title:String)
+}
 class CateCell:UICollectionViewCell{
     let img:UIImageView={
         let img = UIImageView()
@@ -61,7 +65,7 @@ class CateCell:UICollectionViewCell{
 }
 
 class CategoryView: BasicView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-    
+    weak var delegate:CategoryDelegate?
     let categoryList = ["Noodles","Ramen","Pizza","Salad","Taco"]
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryList.count
@@ -75,6 +79,10 @@ class CategoryView: BasicView,UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width/5, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.categorySelecte(categoryId: 0, title: self.categoryList[indexPath.row])
     }
 
     

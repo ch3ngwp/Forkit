@@ -21,7 +21,7 @@ extension testRequest: TargetType {
     var path: String {
         switch self {
         case  let .test():
-            return "test.php"
+            return "display_restaurant.php"
         }
     }
     var method: Moya.Method {

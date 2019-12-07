@@ -9,7 +9,12 @@
 import UIKit
 
 class orderCell:UITableViewCell{
-    
+    weak var delegate:orderViewDelegate?
+    var orderData:Order?{
+        didSet{
+            
+        }
+    }
     let img:UIImageView={
         let img = UIImageView()
         img.layer.cornerRadius = 4
@@ -62,15 +67,20 @@ class orderCell:UITableViewCell{
         return label
     }()
     
-    let detail:UILabel={
-        let label = UILabel()
-        label.textColor = UIColor.black
-        label.text = "Order Detail"
-        label.textAlignment = .right
-        label.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+//    lazy var detail:UIButton={
+//        let yourAttributes: [NSAttributedString.Key: Any] = [
+//            .font: UIFont.systemFont(ofSize: 16),
+//            .foregroundColor: UIColor.black,
+//            .underlineStyle: NSUnderlineStyle.single.rawValue]
+//
+//        let btn = UIButton(type: .system)
+//        let attributeString = NSMutableAttributedString(string: "Order Detail",
+//                                                        attributes: yourAttributes)
+//        btn.setAttributedTitle(attributeString, for: .normal)
+//        btn.contentHorizontalAlignment = .right
+//        btn.translatesAutoresizingMaskIntoConstraints = false
+//        return btn
+//    }()
     
     let divider:UIView={
         let view = UIView()
@@ -108,17 +118,17 @@ class orderCell:UITableViewCell{
         
         
         
+//        addSubview(price)
+//        price.topAnchor.constraint(equalTo: status.bottomAnchor).isActive = true
+//        price.rightAnchor.constraint(equalTo: self.rightAnchor,constant:-16).isActive = true
+//        price.widthAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
+//        price.heightAnchor.constraint(equalTo: time.heightAnchor).isActive = true
+        
         addSubview(price)
-        price.topAnchor.constraint(equalTo: status.bottomAnchor).isActive = true
+        price.topAnchor.constraint(equalTo: time.bottomAnchor).isActive = true
         price.rightAnchor.constraint(equalTo: self.rightAnchor,constant:-16).isActive = true
         price.widthAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
-        price.heightAnchor.constraint(equalTo: time.heightAnchor).isActive = true
-        
-        addSubview(detail)
-        detail.topAnchor.constraint(equalTo: price.bottomAnchor).isActive = true
-        detail.rightAnchor.constraint(equalTo: self.rightAnchor,constant:-16).isActive = true
-        detail.widthAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
-        detail.heightAnchor.constraint(equalTo: img.heightAnchor, multiplier: 1/3).isActive = true
+        price.heightAnchor.constraint(equalTo: img.heightAnchor, multiplier: 1/3).isActive = true
         
                 addSubview(divider)
                 divider.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant:-1).isActive = true
@@ -132,14 +142,24 @@ class orderCell:UITableViewCell{
     }
 }
 
-class orderListView: BasicView,UITableViewDelegate,UITableViewDataSource  {
-    
+
+class OrderListView: BasicView,UITableViewDelegate,UITableViewDataSource  {
+    weak var delegate:orderViewDelegate?
+    var orderList:[Order]?{
+        didSet{
+            self.tableView.reloadData()
+            let index = orderList?.count == 0
+            tableView.isHidden = index
+            message_label.isHidden = !index
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return orderList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! orderCell
+        cell.orderData = self.orderList?[indexPath.row]
         cell.selectionStyle = .none
         return cell
     }
@@ -148,19 +168,10 @@ class orderListView: BasicView,UITableViewDelegate,UITableViewDataSource  {
         return 152
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40))
-//        let title = UILabel(frame: CGRect(x: 16, y: 8, width: tableView.frame.width-32, height: 32))
-//        title.textColor = UIColor.black
-//        title.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
-//        title.text = "Top Seller"
-//        view.addSubview(title)
-//        return view
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 40
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let id = self.orderList?[indexPath.row].id
+        self.delegate?.showOrderDetail(orderId: id ?? "")
+    }
     
     lazy var tableView:UITableView={
         let table = UITableView()
@@ -175,9 +186,24 @@ class orderListView: BasicView,UITableViewDelegate,UITableViewDataSource  {
         return table
     }()
     
+    let message_label:UILabel={
+        let label = UILabel()
+        label.text = "There is no order yet~"
+        label.textColor = UIColor.black.withAlphaComponent(0.5)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     
     override func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(message_label)
+        message_label.topAnchor.constraint(equalTo: self.topAnchor,constant:16).isActive = true
+        message_label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        message_label.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        message_label.heightAnchor.constraint(equalToConstant: 32).isActive = true
         
         addSubview(tableView)
         tableView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true

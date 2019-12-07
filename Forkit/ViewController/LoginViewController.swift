@@ -7,13 +7,48 @@
 //
 
 import UIKit
-
+import Moya
+import Result
 class LoginViewController: UIViewController,LoginViewDelegate {
     
     func login() {
-        let vc = TabbarViewController()
-        UserDefaults.standard.set(true, forKey: "Auth")
-        self.present(vc, animated: false, completion: nil)
+        let account = self.loginView.account_text_filed.text
+        let password = self.loginView.pwd_text_filed.text
+        
+        if account != "test"{
+            alert(message: "User not found!")
+            return
+        }else if password != "test1"{
+            alert(message: "Password does not match!")
+            return
+        }
+        
+        let provider:MoyaProvider<LoginRequest> = MoyaProvider<LoginRequest>()
+        provider.request(.UserLogin(account: account ?? "", password: password ?? "")){result in
+            switch(result){
+            case let .success(moyaResponse):
+                do{
+                    let responseJSON = try JSONSerialization.jsonObject(with: moyaResponse.data, options: []) as! NSArray
+                    
+                    if responseJSON.count != 0{
+                        let user = responseJSON[0] as! NSDictionary
+                        let userId = user["ID"] as? String
+                        let vc = TabbarViewController()
+                        UserDefaults.standard.set(true, forKey: "Auth")
+                        UserDefaults.standard.set(userId, forKey: "user_id")
+                        self.present(vc, animated: false, completion: nil)
+                    }
+//                    let json = NSString(data: moyaResponse.data, encoding: String.Encoding.utf8.rawValue)
+//                    print(responseJSON)
+                } catch let parsingError {
+                    print("Error", parsingError)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+
+        
     }
     
 
@@ -89,6 +124,20 @@ class LoginViewController: UIViewController,LoginViewDelegate {
         UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+    }
+    
+    func alert(message:String){
+        let alert = UIAlertController(title: "", message:message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: {[unowned self] (_) in
+            self.dismiss(animated: false, completion: nil)
+        })
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func test(){
+        
     }
     /*
     // MARK: - Navigation

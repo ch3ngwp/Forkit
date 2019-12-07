@@ -1,5 +1,13 @@
 PODS:
   - Alamofire (4.8.2)
+  - GoogleMaps (3.6.0):
+    - GoogleMaps/Maps (= 3.6.0)
+  - GoogleMaps/Base (3.6.0)
+  - GoogleMaps/Maps (3.6.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.6.0):
+    - GoogleMaps/Base (= 3.6.0)
+  - ImagePicker (3.1.0)
   - Moya (12.0.1):
     - Moya/Core (= 12.0.1)
   - Moya/Core (12.0.1):
@@ -8,19 +16,28 @@ PODS:
   - Result (4.1.0)
 
 DEPENDENCIES:
+  - GoogleMaps
+  - GooglePlaces
+  - ImagePicker
   - Moya (~> 12.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - GoogleMaps
+    - GooglePlaces
+    - ImagePicker
     - Moya
     - Result
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  GoogleMaps: 82f8fe307193bb4de6ef6bf9e88f1d624b718f9d
+  GooglePlaces: 1b9d29cf3e164903d873600f511f42acdfe85294
+  ImagePicker: db1fd7626337b2577c523bef5f499bbbe5a37079
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
 
-PODFILE CHECKSUM: 6cd156ce650dfbc7ed9f265e67dfddeb85a7bed1
+PODFILE CHECKSUM: c6dddfe49acd89ba0248b0bf4255c33a4e063cb9
 
 COCOAPODS: 1.5.3

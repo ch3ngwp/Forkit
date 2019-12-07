@@ -56,7 +56,7 @@ class RegisterView: BasicView {
     
     lazy var login_button:UIButton={
         let btn = UIButton(type: .system)
-        btn.setTitle("login", for: .normal)
+        btn.setTitle("Login", for: .normal)
         btn.contentHorizontalAlignment = .left
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.addTarget(self, action: #selector(toLogin), for: .touchUpInside)

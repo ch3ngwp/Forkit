@@ -20,6 +20,7 @@ class LoginView: BasicView {
         tf.layer.cornerRadius = 4
         tf.placeholder = "Account/E-mail"
         tf.backgroundColor = UIColor.white
+        tf.autocapitalizationType = .none
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
@@ -29,6 +30,8 @@ class LoginView: BasicView {
         tf.layer.cornerRadius = 4
         tf.placeholder = "Password"
         tf.backgroundColor = UIColor.white
+        tf.isSecureTextEntry = true
+        tf.autocapitalizationType = .none
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
@@ -52,7 +55,7 @@ class LoginView: BasicView {
     
     lazy var register_button:UIButton={
         let btn = UIButton(type: .system)
-        btn.setTitle("register", for: .normal)
+        btn.setTitle("Register", for: .normal)
         btn.contentHorizontalAlignment = .left
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.addTarget(self, action: #selector(toRegister), for: .touchUpInside)
