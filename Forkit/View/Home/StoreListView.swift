@@ -7,9 +7,25 @@
 //
 
 import UIKit
-
+protocol storeTableDelegate:NSObjectProtocol {
+    func storeList( storeSelect id:String)
+}
 class StoreCell:UITableViewCell{
+    var storeData:Store?{
+        didSet{
+            let url = storeData?.dishes?.count != 0 ? storeData?.dishes?[0].imageURL?[0] ?? "" : "https://www.urbansplash.co.uk/images/placeholder-16-9.jpg"
+            print(url)
+            store_name.text = storeData?.name
+            describe.text = storeData?.name
+            img.downloaded(from: url)
+        }
+    }
     
+    override func prepareForReuse() {
+        store_name.text = ""
+        describe.text = ""
+        img.image = nil
+    }
     let img:UIImageView={
         let img = UIImageView()
         img.layer.cornerRadius = 4
@@ -89,7 +105,7 @@ class StoreCell:UITableViewCell{
         addSubview(store_name)
         store_name.topAnchor.constraint(equalTo: img.bottomAnchor,constant:8).isActive = true
         store_name.leftAnchor.constraint(equalTo: img.leftAnchor).isActive = true
-        store_name.widthAnchor.constraint(equalTo: self.widthAnchor,multiplier:1/2).isActive = true
+        store_name.widthAnchor.constraint(equalTo: self.widthAnchor,multiplier:2/3).isActive = true
         store_name.heightAnchor.constraint(greaterThanOrEqualToConstant: 16).isActive = true
         
         addSubview(type)
@@ -130,12 +146,25 @@ class StoreCell:UITableViewCell{
 }
 
 class StoreListView: BasicView,UITableViewDelegate,UITableViewDataSource {
+    weak var delegate:storeTableDelegate?
+    var storeList:[Store]?{
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
+    var title:String?{
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.storeList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StoreCell
+        cell.storeData = self.storeList?[indexPath.row]
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -143,18 +172,29 @@ class StoreListView: BasicView,UITableViewDelegate,UITableViewDataSource {
         return 314
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let id = self.storeList?[indexPath.row].id
+        self.delegate?.storeList(storeSelect: id ?? "")
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40))
-        let title = UILabel(frame: CGRect(x: 16, y: 8, width: tableView.frame.width-32, height: 32))
-        title.textColor = UIColor.black
-        title.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
-        title.text = "Top Seller"
-        view.addSubview(title)
-        return view
+        if let table_title =  self.title{
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40))
+            let title = UILabel(frame: CGRect(x: 16, y: 8, width: tableView.frame.width-32, height: 32))
+            title.textColor = UIColor.black
+            title.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+            title.text = table_title
+            view.addSubview(title)
+            return view
+        }
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        if let title = self.title{
+            return 40
+        }
+        return 0
     }
     
     lazy var tableView:UITableView={
